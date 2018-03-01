@@ -3,77 +3,20 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
-#include <stdlib.h>     /* abs */
-#include<math.h>
+
 using namespace std;
-class car;
-class pos { public:
-    int x; int y;
-    void setPos(int nX,int nY)
-    {
-        x=nX;
-        y=nY;
-    }
-    };
+
+struct pos {int x; int y;};
 
 class ride
 {
-
-    public:
+public:
     pos startPos;
     pos finishPos;
     int earlStart;
     int lateFinish;
-    int takken;
-    ride(){takken=0;}
-
-
     // func.
 };
-class car {
-    public:
-pos currentPos;
-ride *  pCurrentRide;
- car()
- {
-     currentPos.setPos(0,0);
-     pCurrentRide =NULL;
- }
- int isAvailable()
- {
-    if(pCurrentRide!=NULL)
-        return 1;
-    return 0;
- }
- int handleRide(ride& nRide)
- {
-      pCurrentRide =&nRide;
-      nRide.takken=1;
- }
-  int update() 
-  {
-     timeRequired=t;
-  }
- int cancelRide(){
-   pCurrentRide->takken=0;
-   pCurrentRide=NULL;
- }
- int distanceFrom(pos & nPos)
- {
-     int distance=0;
-     distance=abs(currentPos.x-nPos.x)+abs(currentPos.y-nPos.y);
-     return distance;
- }
-};
-
- int timeTakenBy( ride & nRide,car & nCar){
-       int timeTAkken=0;
-       timeTAkken=abs(nCar.currentPos.x - nRide.startPos.x)+
-                abs(nCar.currentPos.y-nRide.startPos.y)+
-                abs(nRide.startPos.x-nRide.finishPos.x)+
-                abs(nRide.startPos.y-nRide.finishPos.y);
-        return timeTAkken;
-    }
 
 
 int main(int argv, char* argc[])
@@ -99,6 +42,8 @@ int main(int argv, char* argc[])
             T = tokenArray[5];
         //cout << tokenArray[0];
         //cout << R << C << F << N << B << T;
+        vector <ride> rides;
+        rides.reserve(N);
 		while (getline(infile, temp))
 		{
 			//if (temp.find("\r") != -1) temp.replace(temp.find("\r"), 2, ""); //for linux
@@ -113,14 +58,19 @@ int main(int argv, char* argc[])
                 i++;
             }
             // fill the struct
-            vector <ride> rides;
-            rides.reserve(N);
-            //rides.push_back();
-            for(int o=0 ; o<6 ; o++)
-            {
-                cout << arrEachRide[o] << " ";
-            }
-            cout << endl;
+            ride xRide;
+            xRide.startPos.x = arrEachRide[0];
+            xRide.startPos.y = arrEachRide[1];
+            xRide.finishPos.x = arrEachRide[2];
+            xRide.finishPos.y = arrEachRide[3];
+            xRide.earlStart = arrEachRide[4];
+            xRide.lateFinish = arrEachRide[5];
+            rides.push_back(xRide);
+            //for(int o=0 ; o<6 ; o++)
+            //{
+                cout << rides[0].startPos.x << " ";
+            //}
+            //cout << endl;
 		}
 		infile.close();
 	}
