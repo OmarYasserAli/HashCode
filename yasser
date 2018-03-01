@@ -6,7 +6,6 @@
 #include <stdlib.h>     /* abs */
 #include<math.h>
 using namespace std;
-class car;
 class pos { public:
     int x; int y;
     void setPos(int nX,int nY)
@@ -27,12 +26,11 @@ class ride
     int takken;
     ride(){takken=0;}
 
-
-    // func.
 };
 class car {
     public:
 pos currentPos;
+int timeRequired;
 ride *  pCurrentRide;
  car()
  {
@@ -48,15 +46,23 @@ ride *  pCurrentRide;
  int handleRide(ride& nRide)
  {
       pCurrentRide =&nRide;
+      timeRequired=abs(this->currentPos.x - nRide.startPos.x)+
+                abs(this->currentPos.y-nRide.startPos.y)+
+                abs(nRide.startPos.x-nRide.finishPos.x)+
+                abs(nRide.startPos.y-nRide.finishPos.y);
       nRide.takken=1;
  }
-  int update() 
+  int update()
   {
-     timeRequired=t;
      timeRequired--;
      if (timeRequired==0)
-        
-  }
+        {
+            currentPos=pCurrentRide->finishPos;
+            pCurrentRide=NULL;
+        }
+     if(timeRequired<0)
+            timeRequired=0;
+     }
  int cancelRide(){
    pCurrentRide->takken=0;
    pCurrentRide=NULL;
