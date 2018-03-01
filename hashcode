@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+struct pos {int x; int y};
+
+class ride
+{
+    pos startPos;
+    pos finishPos;
+    int earlStart;
+    int lateFinish;
+    // func.
+};
+
+
+int main(int argv, char* argc[])
+{
+    if (1)//(argv>1)
+	{
+		ifstream infile("C:\\Users\\OmarAli\\Desktop\\HashCode\\a_example.in");//(argc[1]);
+		string sFile="", temp, str;
+		stringstream ss, ssEachRide;
+		int token, tokenArray[6], i=0, arrEachRide[6];
+		getline(infile, str);
+		ss << str;
+		while(ss >> token)
+        {
+            tokenArray[i] = token;
+            i++;
+        }
+        int R = tokenArray[0],
+            C = tokenArray[1],
+            F = tokenArray[2],
+            N = tokenArray[3],
+            B = tokenArray[4],
+            T = tokenArray[5];
+        //cout << tokenArray[0];
+        //cout << R << C << F << N << B << T;
+		while (getline(infile, temp))
+		{
+			//if (temp.find("\r") != -1) temp.replace(temp.find("\r"), 2, ""); //for linux
+			//stringstream ss(temp);
+			//cout <<  endl << temp ;
+			stringstream ssEachRide;
+			ssEachRide << temp;
+			i = 0;
+			while(ssEachRide >> token)
+            {
+                arrEachRide[i] = token;
+                i++;
+            }
+            // fill the struct
+            vector <ride> rides;
+            rides.reserve(N);
+            rides.push_back()
+            for(int o=0 ; o<6 ; o++)
+            {
+                cout << arrEachRide[o] << " ";
+            }
+            cout << endl;
+		}
+		infile.close();
+	}
+    return 0;
+}
