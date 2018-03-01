@@ -1,0 +1,131 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <stdlib.h>     /* abs */
+#include<math.h>
+using namespace std;
+class car;
+class pos { public:
+    int x; int y;
+    void setPos(int nX,int nY)
+    {
+        x=nX;
+        y=nY;
+    }
+    };
+
+class ride
+{
+
+    public:
+    pos startPos;
+    pos finishPos;
+    int earlStart;
+    int lateFinish;
+    int takken;
+    ride(){takken=0;}
+
+
+    // func.
+};
+class car {
+    public:
+pos currentPos;
+ride *  pCurrentRide;
+ car()
+ {
+     currentPos.setPos(0,0);
+     pCurrentRide =NULL;
+ }
+ int isAvailable()
+ {
+    if(pCurrentRide!=NULL)
+        return 1;
+    return 0;
+ }
+ int handleRide(ride& nRide)
+ {
+      pCurrentRide =&nRide;
+      nRide.takken=1;
+ }
+  int update() 
+  {
+     timeRequired=t;
+     timeRequired--;
+     if (timeRequired==0)
+        
+  }
+ int cancelRide(){
+   pCurrentRide->takken=0;
+   pCurrentRide=NULL;
+ }
+ int distanceFrom(pos & nPos)
+ {
+     int distance=0;
+     distance=abs(currentPos.x-nPos.x)+abs(currentPos.y-nPos.y);
+     return distance;
+ }
+};
+
+ int timeTakenBy( ride & nRide,car & nCar){
+       int timeTAkken=0;
+       timeTAkken=abs(nCar.currentPos.x - nRide.startPos.x)+
+                abs(nCar.currentPos.y-nRide.startPos.y)+
+                abs(nRide.startPos.x-nRide.finishPos.x)+
+                abs(nRide.startPos.y-nRide.finishPos.y);
+        return timeTAkken;
+    }
+
+
+int main(int argv, char* argc[])
+{
+    if (1)//(argv>1)
+	{
+		ifstream infile("C:\\Users\\OmarAli\\Desktop\\HashCode\\a_example.in");//(argc[1]);
+		string sFile="", temp, str;
+		stringstream ss, ssEachRide;
+		int token, tokenArray[6], i=0, arrEachRide[6];
+		getline(infile, str);
+		ss << str;
+		while(ss >> token)
+        {
+            tokenArray[i] = token;
+            i++;
+        }
+        int R = tokenArray[0],
+            C = tokenArray[1],
+            F = tokenArray[2],
+            N = tokenArray[3],
+            B = tokenArray[4],
+            T = tokenArray[5];
+        //cout << tokenArray[0];
+        //cout << R << C << F << N << B << T;
+		while (getline(infile, temp))
+		{
+			//if (temp.find("\r") != -1) temp.replace(temp.find("\r"), 2, ""); //for linux
+			//stringstream ss(temp);
+			//cout <<  endl << temp ;
+			stringstream ssEachRide;
+			ssEachRide << temp;
+			i = 0;
+			while(ssEachRide >> token)
+            {
+                arrEachRide[i] = token;
+                i++;
+            }
+            // fill the struct
+            vector <ride> rides;
+            rides.reserve(N);
+            //rides.push_back();
+            for(int o=0 ; o<6 ; o++)
+            {
+                cout << arrEachRide[o] << " ";
+            }
+            cout << endl;
+		}
+		infile.close();
+	}
+    return 0;
+}
